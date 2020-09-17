@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>헤비 라이트 유저 리스트</title>
+    <link rel="stylesheet" href="./static/css/navigation_bar.css">
+</head>
+<body>
+    <header>
+        <div>
+            <h1>
+            
+                
+            </h1>
+        </div>
+        <div>
+            
+        </div>
+        <div>
+            
+        </div>
+    </header>
+    <nav>
+        <ul>
+            
+        </ul>
+    </nav>
+    <aside id="left">
+        <h4>선택</h4>
+        <ul>
+            <li><a href="/">메인</a></li>
+            <li><a href="/bot_user_detect">봇 유저 검사</a></li>
+            <li><a href="/H_L_user_info">헤비 라이트 유저</a></li>
+            <li><a href="/bot_user_detect_history">검출 history</a></li>
+        </ul>
+    </aside>
+    <section id="main">
+        <div class="container">
+            <h2>Heavy user</h2>
+            <h3>{posts.header}</h3>
+            {% for data in posts %}
+            <div class="card">
+                <div class="card-body">
+                    <a href="/game_bot_detail?data="+{posts.data}>{posts.data_heavy}</a>
+                </div>
+            </div>
+            {% endfor %}
+            {% if posts.has_previous %}
+            <a href="?page=1">맨 앞으로</a>
+            <a href="?page={{posts.previous_page_number}}">이전으로</a>
+            {% endif %}
+            <span>{{posts.number}}</span>
+            <span>/</span>
+            <span>{{posts.paginator.num_pages}}</span>
+            {% if posts.has_next %}
+            <a href="?page={{posts.next_page_number}}">다음으로</a>
+            <a href="?page={{posts.paginator.num_pages}}">맨 뒤로</a>
+            {% endif %}
+            
+        </div>
+        <div class="container">
+            <h2>Light user</h2>
+            <h3>{posts.header}</h3>
+            {% for data in posts %}
+            <div class="card">
+                <div class="card-body">
+                    <a href="/game_bot_detail?data="+{posts.data}>{posts.data_light}</a>
+                </div>
+            </div>
+            {% endfor %}
+            {% if posts.has_previous %}
+            <a href="?page=1">맨 앞으로</a>
+            <a href="?page={{posts.previous_page_number}}">이전으로</a>
+            {% endif %}
+            <span>{{posts.number}}</span>
+            <span>/</span>
+            <span>{{posts.paginator.num_pages}}</span>
+            {% if posts.has_next %}
+            <a href="?page={{posts.next_page_number}}">다음으로</a>
+            <a href="?page={{posts.paginator.num_pages}}">맨 뒤로</a>
+            {% endif %}
+            
+        </div>
+    </section>
+    
+    <aside id="right">
+        <div id='main_img'>
+            
+        </div>
+    </aside>
+    <footer>Copyright & copy; 2020 YR</footer>
+</body>
+</html>

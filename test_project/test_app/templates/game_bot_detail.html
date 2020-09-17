@@ -1,0 +1,112 @@
+{% load static %} <!-- django 3.0 부터는 staticfiles 는 사용 불가-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Bot Detection</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"></script>
+    {% comment %} <script type="text/css" href="../static/css/graph.css"> {% endcomment %}
+
+    <style>
+        #title{
+            text-align:center;
+        }
+        #info_section{
+            width:100%;
+            height:70px;
+            position:relative;
+            margin-top:5%;
+            
+        }
+        #user_id{
+            text-align:center;
+            {% comment %} margin-left:19%; {% endcomment %}
+            width:49%;
+            float:left;
+            border: 2px solid;
+            {% comment %} margin-right: 5px; {% endcomment %}
+            color: #fff;
+            background-color: #343a40;
+            border-color: #454d55;
+        }
+        #bot_percentage{
+            text-align:center;
+            {% comment %} margin-right:19%; {% endcomment %}
+            width:49%;
+            float:left;
+            border: 2px solid;
+            {% comment %} margin-left: 5px; {% endcomment %}
+            color: #fff;
+            background-color: #343a40;
+            border-color: #454d55;
+        }
+        #graph_section1{
+            width:49%;
+            float:left;
+            text-align:center;
+            {% comment %} margin-left:20%; {% endcomment %}
+        }
+        #graph_section2{
+            width:49%;
+            float:left;
+            text-align:center;
+            {% comment %} margin-left:10px; {% endcomment %}
+        }
+        #bar{
+            margin: 0 auto;
+            max-width:100%;
+        }
+        #radar{
+            margin: 0 auto;
+            max-width:100%;
+        }
+
+    </style>
+</head>
+<body>
+    {% comment %} <header id="title">
+        <h1>Game Bot Detection</h1>  
+    </header> {% endcomment %}
+    <article>
+        <section id="info_section">
+            <div id="user_id"><h3> 사용자 ID: <span>{{ user_id }}</span></h3> </div>
+            <div id="bot_percentage"><h3>봇일 확률: <span>{{bot_percentage}}</span> </h3></div>
+        </section>
+        <br><br>
+        <!-- 가져온 값 -->
+        <input type="hidden" id="features_var" name="variable" value="{{ features }}">
+        <input type="hidden" id="human_data_var" name="human_var" value="{{human_data}}"> 
+        <input type="hidden" id="bot_data_var" name="bot_var" value="{{bot_data}}" >
+        <section id="object_area">
+            <section id="graph_section1">
+                    <div id="graph_area1">
+                        <div id="feature_title">
+                            <h3> 특성 그래프 </h3>
+                        </div>
+                        <div id="feature_graph">
+                            <canvas id="radar" width="500" height="500"></canvas>
+                            <script type="text/javascript" src="../static/js/radar2.js"></script>
+                        </div>
+                    <div>
+
+            </section>
+            <section id="graph_section2">  
+                <div id="graph_area2">
+                    <div id="area2_title">
+                        <h3 id="feature_weight_graph"> 특성별 가중치 그래프</h3>
+                    </div>
+                    <div id="area2_graph">
+                        <canvas id="bar" width="500" height="500" ></canvas>
+                        {% comment %} <script>var features_var = "{{ features }}" </script> {% endcomment %}
+                        <script type="text/javascript" src="/static/js/bar4.js"></script>
+                    </div>
+                </div>
+            
+            </section>
+        </section>
+    </article>
+    
+</body>
+</html>
