@@ -1,0 +1,80 @@
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> -->
+<style>
+    .table tbody tr:hover td, .table tbody tr:hover th {
+    background-color: greenyellow;
+    }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- <script>
+    function pagination_for_bot_list(page, header, file_name){
+        var page_number = document.getElementById("next_page_number").value;
+        // var page_number = page;
+        var header = document.getElementById("header").value;
+        var file_name = document.getElementById("file_name").value;
+        // var data = {
+        //     "header" : header,
+        //     "page" : page_number,
+        //     "file_name" : file_name
+        // };
+        console.log("찍히나 안찍히나")
+        $.ajax({ 
+                    type : 'GET',
+                    url :'/pagenation_bot_user_detect_list/',
+            
+                    data :  {
+            "header" : header,
+            "page" : page_number,
+            "file_name" : file_name
+        },
+                    success:function(response){ 
+                        $("#spead_list").html(response);   
+
+                    }
+    })
+}
+</script> -->
+<!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
+<div class="container">
+    <table class='table table-striped'>
+        <thead class="thead-dark">
+            <tr>
+                {% for data in header %}
+                <th scope="col">{{ data }}</th>
+                {% endfor %} 
+            </tr>
+        </thread>
+        <tbody>
+        {% for data in posts %}
+            <tr style="cursor: pointer;" id="table_hover" onclick="goto_info( {{ data.bot_id }} )">
+                <th scope="row">{{ data.bot_id }}</th>
+                <td>{{ data.same_point_connection_rate }}</td>
+                <td>{{ data.Login_day_count  }}</td>
+                <td>{{ data.playtime_per_day  }}</td>
+                <td>{{ data.avg_money  }}</td>
+                <td>{{ data.Item_get_ratio  }}</td>
+                <td>{{ data.Exp_get_ratio   }}</td>
+                <td>BOT</td>
+                
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <!-- 가져온 값 -->
+    <input type="hidden" id="header" name="header" value="{{ header }}">
+    <input type="hidden" id="file_name" name="file_name" value="{{file_name}}"> 
+    <input type="hidden" id="previous_page_number" name="previous_page_number" value="{{posts.previous_page_number}}" >
+    <input type="hidden" id="next_page_number" name="next_page_number" value="{{posts.next_page_number}}" >
+    <input type="hidden" id="last_page" name="last_page" value="{{posts.paginator.num_pages}}" >
+    {% if posts.has_previous %}
+    <button type="button" onclick="pagination_for_bot_list()">맨 앞으로</button>
+    <button type="button" onclick="pagination_for_bot_list()" >이전으로</button>
+    {% endif %}
+    <span>{{posts.number}}</span>
+    <span>/</span>
+    <span>{{posts.paginator.num_pages}}</span>
+    {% if posts.has_next %}
+    <button type="button" onclick="pagination_for_bot_list()" >다음으로</button>
+    <button type="button" onclick="pagination_for_bot_list()">맨 뒤로</button>
+    {% endif %}
+    
+</div>

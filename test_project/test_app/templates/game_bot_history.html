@@ -64,7 +64,7 @@
 </div>
     <article id="article">  
         <section id="section_1">
-        <h3 id="h_title">History List</h3> 
+        <h1 id="h_title">History List</h1> 
         </section> <br>
         
         <section>
@@ -92,15 +92,15 @@
         <br>
         <section id="paging">
             <h5>
+            <a href="?page=1"><img src="../static/img/page_pprev.png"/></a>&nbsp;
             {% if history.has_previous %}
                 <a href='?page={{history.number|add:-1}}'><img src="../static/img/page_prev.png"/></a>
             {% endif %}
-
             &nbsp;&nbsp; Page {{ history.number}} of {{ history.paginator.num_pages}} &nbsp;&nbsp;
-
             {% if history.has_next %}
-                <a href='?page={{history.number|add:+1}}'><img src="../static/img/page_next.png"/></a>
+                <a href='?page={{history.number|add:+1}}'><img src="../static/img/page_next.png"/></a>&nbsp;
             {% endif %}
+            <a href="?page={{history.paginator.num_pages}}"><img src="../static/img/page_nnext.png"/></a>
             </h5>
        </section>
     </article>

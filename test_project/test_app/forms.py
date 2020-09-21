@@ -1,5 +1,5 @@
 from django import forms
-from .models import UploadFileModel
+from .models import UploadFileModel, BotDetailData
 class UploadFileForm(forms.ModelForm):
     class Meta:
         
@@ -18,3 +18,4 @@ class UploadFileForm(forms.ModelForm):
 #     class Meta:
 #         model = Photo
 #         field = ('file',)
+

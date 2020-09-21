@@ -7,14 +7,14 @@ features_var = features_var.replaceAll("'",'')
 features_var = features_var.split(",");
 
 var human_var = document.getElementById("human_data_var").value;
-var human_var = human_var.replace('[','');
-var human_var = human_var.replace(']','');
-var human_var = human_var.split(","); 
+human_var = human_var.replace('[','');
+human_var = human_var.replace(']','');
+human_var = human_var.split(","); 
 
 var bot_var = document.getElementById("bot_data_var").value;
-var bot_var = bot_var.replace('[','');
-var bot_var = bot_var.replace(']','');
-var bot_var = bot_var.split(",");
+bot_var = bot_var.replace('[','');
+bot_var = bot_var.replace(']','');
+bot_var = bot_var.split(",");
 
 
 var config =  {

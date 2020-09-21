@@ -5,7 +5,20 @@
     }
 </style>
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<style>
+    .table tbody tr:hover td, .table tbody tr:hover th {
+    background-color: greenyellow;
+    }
+</style>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <div class="container">
+    <input type="hidden" id="file_name" name="file_name" value="{{file_name}}"> 
+    <input type="hidden" id="header" name="header" value="{{ header }}">
     <table class='table table-striped'>
         <thead class="thead-dark">
             <tr>
@@ -16,7 +29,7 @@
         </thread>
         <tbody>
         {% for data in posts %}
-            <tr style="cursor: pointer;" id="table_hover" onclick="goto_info( {{ data.bot_id }} )">
+            <tr style="cursor: pointer;" id="table_hover" onclick="goto_info( {{ data.bot_id}})">    
                 <th scope="row">{{ data.bot_id }}</th>
                 <td>{{ data.same_point_connection_rate }}</td>
                 <td>{{ data.Login_day_count  }}</td>
@@ -31,16 +44,20 @@
         </tbody>
     </table>
 
+    <a href="#" onclick="upload_file_ajax_paging(1)"><img src="../static/img/page_pprev.png"/></a>&nbsp;
     {% if posts.has_previous %}
-    <a href="?page=1">맨 앞으로</a>
-    <a href="?page={{posts.previous_page_number}}">이전으로</a>
+    <a href="#" onclick="upload_file_ajax_paging({{posts.previous_page_number}})"><img src="../static/img/page_prev.png"/></a>
     {% endif %}
+    &nbsp;
     <span>{{posts.number}}</span>
-    <span>/</span>
+    <span>&nbsp;/&nbsp;</span>
     <span>{{posts.paginator.num_pages}}</span>
     {% if posts.has_next %}
-    <a href="?page={{posts.next_page_number}}">다음으로</a>
-    <a href="?page={{posts.paginator.num_pages}}">맨 뒤로</a>
+    &nbsp;
+    <a href="#" onclick="upload_file_ajax_paging({{posts.next_page_number}})"><img src="../static/img/page_next.png"/></a>&nbsp;
+    {% comment %} <a href="?page={{posts.next_page_number}}">다음으로</a>
+    <a href="?page={{posts.paginator.num_pages}}">맨 뒤로</a> {% endcomment %}
     {% endif %}
+    <a href="#" onclick="upload_file_ajax_paging({{posts.paginator.num_pages}})"><img src="../static/img/page_nnext.png"/></a>
     
 </div>

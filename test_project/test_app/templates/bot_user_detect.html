@@ -9,15 +9,32 @@
 
   <!-- Bootstrap -->
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    
-    <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script> -->
-  <!-- <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script> -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> 
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>  -->
   <script type="text/javascript"> 
-    function upload_file_ajax(){
+  function upload_file_ajax_paging(page=0){
+    var formData = new FormData();
+    var file_name = document.getElementById("file_name").value;
+    var header = document.getElementById("header").value;
+    console.log(file_name,"\t파일이름\t",header)
+    formData.append("page_num", page)
+    formData.append("file_name", file_name)
+    formData.append("header", header)
+    $.ajax({ 
+                    type : 'POST',
+                    url :'/upload_file/',
+                    
+                    processData : false,
+                    contentType : false,
+                    data :  formData,
+                    success:function(response){ 
+                        $("#spead_list").html(response);   
+                    }
+                  })
+  }
+    function upload_file_ajax(page=0){
         var upload_file = document.getElementById("ex_file").files;
         // var formData = new FormData();
         // formData.append("file", $("#ex_file")[0].files[0]);
@@ -25,6 +42,7 @@
                 var formData = new FormData();
                 // upload_file = document.getElementById("ex_file").files;
                 formData.append("upload_file", $("#ex_file")[0].files[0]);
+                formData.append("page_num", page);
                 // if (formData.has('file')){return alert(formData.get('file'))} 
                 $.ajax({ 
                     type : 'POST',
@@ -35,17 +53,47 @@
                     success:function(response){ 
                         $("#spead_list").html(response);   
 
-                    }
+                    },
+              beforeSend: function () {
+              var width = 0;
+              var height = 0;
+              var left = 0;
+              var top = 0;
+
+              width = 350;
+              height = 350;
+
+
+              top = ( $(window).height() - height ) / 2 + $(window).scrollTop();
+              left = ( $(window).width() - width ) / 2 + $(window).scrollLeft();
+
+ 
+
+              if($("#div_ajax_load_image").length != 0) {
+                     $("#div_ajax_load_image").css({
+                            "top": top+"px",
+                            "left": left+"px"
+                     });
+                     $("#div_ajax_load_image").show();
+              }
+              else {
+                     $('body').append('<div id="div_ajax_load_image" style="position:absolute; top:' + top + 'px; left:' + left + 'px; width:' + width + 'px; height:' + height + 'px; z-index:9999; background:#f0f0f0; filter:alpha(opacity=50); opacity:alpha*0.5; margin:auto; padding:0; "><img src="../static/img/load2.GIF" style="width:350px; height:350px;"></div>');
+              }
+
+       }
+       , complete: function () {
+                     $("#div_ajax_load_image").hide();
+       }
+
                 }) 
             }
     }
     function goto_info(bot_id){
-        console.log(bot_id)
-        var bot_id = bot_id
+        var bot_id = bot_id        
         $.ajax({ 
             type : 'GET',
             url :'/game_bot_detail/',
-            data : {'bot_id':bot_id},
+            data : {'bot_id':bot_id },
             success:function(response){ 
                 $("#spead_graph").html(response);   
             }
@@ -54,6 +102,9 @@
     </script>
   <style>
   body {padding-top: 60px;}
+  .col-md-9{
+    background-color: #eee;
+  }
   </style>
 </head>
 
@@ -86,7 +137,7 @@
 </div>
 </div>
 <!-- 9단길이의 첫번째 열 -->
-  <div class="col-md-9">
+  <div class="col-md-9" >
     <div class="jumbotron text-center">
         <h2 class="top"> 봇 유저 검사 페이지</h2>
         <div class="form-group">
@@ -100,7 +151,6 @@
             <div id="spead_list">
                 
             </div>
-            <br><br><br>
             <div id="spead_graph">
 
             </div>

@@ -1,10 +1,9 @@
 [client]
-database = gamebot
-host = game-bot-rds.cbip1ztonb0u.us-west-2.rds.amazonaws.com
-user = gamebot
-password = gamebot!
-
 # database = gamebot
-# host = localhost
-# user = teamc
-# password = teamc
+# host = game-bot-rds.cbip1ztonb0u.us-west-2.rds.amazonaws.com
+# user = gamebot
+# password = gamebot!
+database = gamebot
+host = localhost
+user = teamc
+password = teamc

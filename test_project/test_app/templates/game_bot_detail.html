@@ -5,11 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Bot Detection</title>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"></script>
-    {% comment %} <script type="text/css" href="../static/css/graph.css"> {% endcomment %}
-
     <style>
+        article{
+            background-color: white;
+        }
         #title{
             text-align:center;
         }
@@ -22,37 +21,33 @@
         }
         #user_id{
             text-align:center;
-            {% comment %} margin-left:19%; {% endcomment %}
-            width:49%;
+            width:50%;
             float:left;
             border: 2px solid;
-            {% comment %} margin-right: 5px; {% endcomment %}
             color: #fff;
             background-color: #343a40;
-            border-color: #454d55;
+            
         }
         #bot_percentage{
             text-align:center;
-            {% comment %} margin-right:19%; {% endcomment %}
-            width:49%;
+            width:50%;
             float:left;
             border: 2px solid;
-            {% comment %} margin-left: 5px; {% endcomment %}
             color: #fff;
             background-color: #343a40;
-            border-color: #454d55;
+            
         }
         #graph_section1{
-            width:49%;
+            width:50%;
             float:left;
             text-align:center;
-            {% comment %} margin-left:20%; {% endcomment %}
+            background-color: white;   
         }
         #graph_section2{
-            width:49%;
+            width:50%;
             float:left;
             text-align:center;
-            {% comment %} margin-left:10px; {% endcomment %}
+            background-color: white;
         }
         #bar{
             margin: 0 auto;
@@ -72,22 +67,30 @@
     <article>
         <section id="info_section">
             <div id="user_id"><h3> 사용자 ID: <span>{{ user_id }}</span></h3> </div>
-            <div id="bot_percentage"><h3>봇일 확률: <span>{{bot_percentage}}</span> </h3></div>
+            <div id="bot_percentage"><h3>봇 검출 비율: <span>{{bot_percentage}}</span> </h3></div>
         </section>
         <br><br>
+
+        <!-- 최재호 수정 -->
         <!-- 가져온 값 -->
         <input type="hidden" id="features_var" name="variable" value="{{ features }}">
-        <input type="hidden" id="human_data_var" name="human_var" value="{{human_data}}"> 
-        <input type="hidden" id="bot_data_var" name="bot_var" value="{{bot_data}}" >
+        <input type="hidden" id="human_data_var" name="human_var" value="{{human_data}}">
+        <input type="hidden" id="bot_data_var" name="bot_var" value="{{bot_data}}">
+        <input type="hidden" id="bar_features_var" name="bar_f_var" value="{{bar_features}}">
+        <input type="hidden" id="bar_data_var" name="bar_var" value="{{bar_data}}">
+        
         <section id="object_area">
             <section id="graph_section1">
                     <div id="graph_area1">
                         <div id="feature_title">
                             <h3> 특성 그래프 </h3>
                         </div>
+                        
+                        
                         <div id="feature_graph">
                             <canvas id="radar" width="500" height="500"></canvas>
-                            <script type="text/javascript" src="../static/js/radar2.js"></script>
+                            <script type="text/javascript" src="../static/js/radar.js"></script>
+    
                         </div>
                     <div>
 
@@ -99,8 +102,8 @@
                     </div>
                     <div id="area2_graph">
                         <canvas id="bar" width="500" height="500" ></canvas>
-                        {% comment %} <script>var features_var = "{{ features }}" </script> {% endcomment %}
-                        <script type="text/javascript" src="/static/js/bar4.js"></script>
+                        <!-- {% comment %} <script>var features_var = "{{ features }}" </script> {% endcomment %} -->
+                        <script type="text/javascript" src="../static/js/bar.js"></script>
                     </div>
                 </div>
             

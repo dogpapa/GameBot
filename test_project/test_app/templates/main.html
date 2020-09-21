@@ -18,6 +18,14 @@
 
   <style>
   body {padding-top: 60px;}
+  #flow_img{
+    width:80%;
+    background-color: white;
+  }
+  #main{
+    text-align:center;
+  }
+  
   </style>
 </head>
 
@@ -53,7 +61,8 @@
   <div class="col-md-9">
     <div class="jumbotron">
         <section id="main" >
-            <iframe src="./static/img/soccer1200x800_2.jpg"></iframe>
+            {% comment %} <iframe src="./static/img/흐름도.png"></iframe> {% endcomment %}
+            <img id="flow_img" src="./static/img/흐름도.png"/>
             <h3>알고리즘과 각종 설명들을 쓰는 란 입니다</h3>
         </section>
     </div>

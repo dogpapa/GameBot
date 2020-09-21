@@ -23,9 +23,10 @@ urlpatterns = [
     path('',test_app.views.main, name='main'),
     path('bot_user_detect/',test_app.views.bot_user_detect, name='bot_user_detect'),
     path('upload_file/',test_app.views.upload_file, name='upload_file'),
-    path('H_L_user_list/',test_app.views.H_L_user_list, name='H_L_user_list'),
+    path('H_L_user_info/',test_app.views.H_L_user_list, name='H_L_user_list'),
     path('game_bot_detail/', test_app.views.gamebotdetail, name='gamebotdetail'),
     path('game_bot_history/', test_app.views.gamebothistory, name='gamebothistory'),
+    path('pagenation_bot_user_detect_list/',test_app.views.pagenation_bot_user_detect_list, name="pagenation_bot_user_detect_list")
 ] 
 if settings.DEBUG: 
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
